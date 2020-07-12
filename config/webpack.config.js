@@ -27,6 +27,9 @@ const commonConfig = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   plugins: [
     new HtmlWebpackPlugin({ title: 'Note Maker', template: join(__dirname, 'index.html') }),
   ],
