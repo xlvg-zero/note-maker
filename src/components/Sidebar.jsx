@@ -6,6 +6,10 @@ import generateChapterPath from '../generateChapterPath';
 
 import './side-bar.css';
 
+const ChapterLink = ({ chapterNumber }) => (
+  <Link className="list-group-item list-group-item-action bg-light" to={generateChapterPath(chapterNumber)}>Chapter {chapterNumber}</Link>
+)
+
 function Sidebar() {
   return (
     <div>
@@ -13,8 +17,10 @@ function Sidebar() {
       <div className="bg-light border-right" id="sidebar-wrapper">
         <div className="sidebar-heading">Chapters</div>
         <div className="list-group list-group-flush">
-          {chapterKeys.map((key) => (
-            <Link key={key} className="list-group-item list-group-item-action bg-light" to={generateChapterPath(key)}>Chapter {key}</Link>
+          <Link key='/' className="list-group-item list-group-item-action bg-light" to='/'>Introduction</Link>
+          {chapterKeys.map((chapterNumber) => (
+            <ChapterLink key={chapterNumber} chapterNumber={chapterNumber} />
+            // <Link key={key} className="list-group-item list-group-item-action bg-light" to={generateChapterPath(key)}>Chapter {key}</Link>
           ))}
           {/* <a href="#" className="list-group-item list-group-item-action bg-light">
             Dashboard

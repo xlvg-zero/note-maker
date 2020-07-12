@@ -9,8 +9,10 @@ const distPath = join(__dirname, '..', 'dist');
 const commonConfig = {
   entry: join(__dirname, '..', 'src', 'index.jsx'),
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].[chunkhash].js',
     path: distPath,
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -41,6 +43,7 @@ const devConfig = {
     contentBase: distPath,
     compress: true,
     port: 9000,
+    historyApiFallback: true,
   },
   module: {
     rules: [

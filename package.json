@@ -26,6 +26,8 @@
     "webpack-merge": "^5.0.9"
   },
   "dependencies": {
+    "bootstrap": "^4.5.0",
+    "github-markdown-css": "^4.0.0",
     "mdx.macro": "^0.2.9",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

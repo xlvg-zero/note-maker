@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Switch, BrowserRouter, Route } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'github-markdown-css/github-markdown.css';
 
 // import { importMDX, importMDX } from 'mdx.macro';
 
@@ -8,10 +11,12 @@ import IntroPage from "./other-pages/intro-page.mdx";
 
 // const IntroPage = importMDX.sync('./other-pages/intro-page.mdx');
 
-import chapterKeys from "./chapterKeys";
+import chapterKeys, { requireAttempt } from "./chapterKeys";
 import generateChapterPath from "./generateChapterPath";
 
 import Sidebar from "./components/Sidebar";
+
+import './content-style.css';
 
 const sortedKeys = chapterKeys.slice();
 
@@ -28,25 +33,26 @@ function App() {
 
   return (
     <div className="d-flex">
-      <BrowserRouter>
+      <Router>
         <Sidebar />
         <div className="markdown-body">
           <Switch>
-            <Route path="/">
+            <Route path="/" exact>
               <IntroPage />
               {/* <h3>eyyyy</h3> */}
             </Route>
             <React.Suspense fallback={<div>Loading...</div>}>
               {sortedKeys.map((key) => {
+                const ComponentForRoute = React.lazy(() => import(`./chapters/${key}.mdx`));
                 return (
-                <Route key={key} path={generateChapterPath(key)}>
-                  {React.lazy(() => import(`./chapters/${key}.mdx`))}
+                <Route key={key} path={`/chapter/${key}`}>
+                  <ComponentForRoute />
                 </Route>
               )})}
             </React.Suspense>
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
