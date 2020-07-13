@@ -82,6 +82,7 @@ button.bg-light:focus {
 
 #sidebar-wrapper {
   min-height: 100vh;
+  height: 100%;
   margin-left: -15rem;
   /* margin-right: 1rem; */
   -webkit-transition: margin .25s ease-out;
